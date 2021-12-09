@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoWallet">
         <activity
+            android:name=".DescriptionPage"
+            android:exported="true" />
+        <activity
+            android:name=".BottomTab"
+            android:exported="true"
+            android:label="@string/title_activity_bottom_tab"></activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
