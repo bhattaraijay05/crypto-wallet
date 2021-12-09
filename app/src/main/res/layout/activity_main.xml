@@ -19,8 +19,18 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Click"
+        android:text="Bottom Tab Page"
         android:id="@+id/button"
         />
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login Page"
+        android:id="@+id/login"
+        />
+
 
 </LinearLayout>

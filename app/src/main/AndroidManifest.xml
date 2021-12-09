@@ -10,12 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoWallet">
         <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="true"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".DescriptionPage"
             android:exported="true" />
         <activity
             android:name=".BottomTab"
             android:exported="true"
-            android:label="@string/title_activity_bottom_tab"></activity>
+            android:label="@string/title_activity_bottom_tab" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

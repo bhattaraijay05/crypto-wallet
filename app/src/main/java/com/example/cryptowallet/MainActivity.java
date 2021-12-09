@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cryptowallet.ui.login.LoginActivity;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -15,9 +17,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btn = (Button) findViewById(R.id.button);
+        Button logbut = (Button) findViewById(R.id.login);
+
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BottomTab.class);
+                startActivity(intent);
+            }
+        });
+
+
+        logbut.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });
