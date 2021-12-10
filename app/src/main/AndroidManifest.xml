@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cryptowallet">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,16 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoWallet">
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="true"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".DescriptionPage"
-            android:exported="true" />
-        <activity
             android:name=".BottomTab"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/title_activity_bottom_tab" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.CryptoWallet.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
