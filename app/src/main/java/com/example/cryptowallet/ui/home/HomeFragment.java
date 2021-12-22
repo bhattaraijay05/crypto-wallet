@@ -1,10 +1,12 @@
 package com.example.cryptowallet.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.cryptowallet.LoginActivity;
 import com.example.cryptowallet.R;
 import com.example.cryptowallet.databinding.FragmentHomeBinding;
 import com.example.cryptowallet.model.CryptoData;
@@ -48,9 +51,15 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         listView = binding.mobileList;
         cryptoList = new ArrayList<String>();
-        loadCoinList();
+
         return root;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        loadCoinList();
+    }
+
     private void loadCoinList() {
         JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
                 new Response.Listener<JSONObject>() {
