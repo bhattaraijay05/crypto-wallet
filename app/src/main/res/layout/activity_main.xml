@@ -8,72 +8,20 @@
     android:background="#0F9D58"
     tools:context=".MainActivity">
 
-    <!-- apply LiquidPager on main activity -->
     <com.cuberto.liquid_swipe.LiquidPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skip"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/skipButton"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="30dp"
+        />
+
+
 </RelativeLayout>
-
-
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    android:paddingLeft="@dimen/activity_horizontal_margin"-->
-<!--    tools:context=".MainActivity">-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_centerVertical="true"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        tools:ignore="UselessParent">-->
-
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textAppearance="?android:attr/textAppearanceLarge"-->
-<!--            android:text="User Registration"-->
-<!--            android:id="@+id/textView"-->
-<!--            android:layout_gravity="center_horizontal" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/editTextEmail"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="15dp"-->
-<!--            android:hint="Enter email"-->
-<!--            android:inputType="textEmailAddress" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/editTextPassword"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="15dp"-->
-<!--            android:hint="Enter password"-->
-<!--            android:inputType="textPassword" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/buttonSignup"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="15dp"-->
-<!--            android:text="Signup" />-->
-
-<!--        <TextView-->
-<!--            android:text="Already Registered? Signin Here"-->
-<!--            android:id="@+id/textViewSignin"-->
-<!--            android:textAlignment="center"-->
-<!--            android:layout_margin="15dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content" />-->
-
-<!--    </LinearLayout>-->
-
-<!--</LinearLayout>-->
-<!-- -->

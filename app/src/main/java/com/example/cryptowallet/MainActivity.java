@@ -1,6 +1,7 @@
 package com.example.cryptowallet;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,5 +29,9 @@ public class MainActivity extends AppCompatActivity {
             viewPager = new viewPager(getSupportFragmentManager(), 1);
             pager.setAdapter(viewPager);
         }
+        Button skipButton = (Button) findViewById(R.id.skipButton);
+        skipButton.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        });
     }
 }

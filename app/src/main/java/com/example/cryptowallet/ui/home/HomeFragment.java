@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -22,10 +20,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.cryptowallet.LoginActivity;
+import com.example.cryptowallet.CoinData;
 import com.example.cryptowallet.R;
 import com.example.cryptowallet.databinding.FragmentHomeBinding;
-import com.example.cryptowallet.model.CryptoData;
+import com.example.cryptowallet.model.CryptoModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,19 +47,26 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        listView = binding.mobileList;
+        listView = binding.currencyList;
         cryptoList = new ArrayList<String>();
+        loadCoinList();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = (String) listView.getItemAtPosition(position);
+                Intent intent = new Intent(getActivity().getApplicationContext(), CoinData.class);
+                intent.putExtra("coinData", item);
+                startActivity(intent);
+            }
+        });
 
         return root;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        loadCoinList();
-    }
 
     private void loadCoinList() {
-        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -69,11 +74,17 @@ public class HomeFragment extends Fragment {
                             JSONArray cryptoArray = response.getJSONArray("data");
                             for (int i = 0; i < cryptoArray.length(); i++) {
                                 JSONObject cryptoObject = cryptoArray.getJSONObject(i);
-                                CryptoData coin = new CryptoData(cryptoObject.getString("name"),cryptoObject.getString("symbol"));
+                                String symbol = cryptoObject.getString("symbol");
+                                String name = cryptoObject.getString("name");
+                                JSONObject quote = cryptoObject.getJSONObject("quote");
+                                JSONObject USD = quote.getJSONObject("USD");
+                                double price = USD.getDouble("price");
+                                CryptoModel coin = new CryptoModel(name, symbol, price);
                                 cryptoList.add(coin.getName());
 //                                cryptoList.add(coin.getSymbol());
+//                                currencyModalArrayList.add(new CryptoData(name, symbol));
                             }
-                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.activity_listview, cryptoList);
+                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.activity_listview, R.id.name, cryptoList);
                             listView.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -99,9 +110,10 @@ public class HomeFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(objectRequest);
     }
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        binding = null;
+//    }
 }
