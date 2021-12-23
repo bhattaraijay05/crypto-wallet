@@ -2,6 +2,7 @@ package com.example.cryptowallet.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.cryptowallet.CoinAdapter;
 import com.example.cryptowallet.CoinData;
 import com.example.cryptowallet.R;
 import com.example.cryptowallet.databinding.FragmentHomeBinding;
@@ -38,7 +40,7 @@ import java.util.Map;
 
 public class HomeFragment extends Fragment {
     ListView listView;
-    List<String> cryptoList;
+    List<CryptoModel> cryptoList;
     private FragmentHomeBinding binding;
     private String ACCESS_TOKEN = "b3ae9792-4fcc-4a8f-9376-42ad354f9bd0";
     private String url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=100";
@@ -48,16 +50,16 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         listView = binding.currencyList;
-        cryptoList = new ArrayList<String>();
+        cryptoList = new ArrayList<CryptoModel>();
         loadCoinList();
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String) listView.getItemAtPosition(position);
+                CryptoModel item = cryptoList.get(position);
                 Intent intent = new Intent(getActivity().getApplicationContext(), CoinData.class);
                 intent.putExtra("coinData", item);
                 startActivity(intent);
+
             }
         });
 
@@ -80,11 +82,11 @@ public class HomeFragment extends Fragment {
                                 JSONObject USD = quote.getJSONObject("USD");
                                 double price = USD.getDouble("price");
                                 CryptoModel coin = new CryptoModel(name, symbol, price);
-                                cryptoList.add(coin.getName());
+                                cryptoList.add(coin);
 //                                cryptoList.add(coin.getSymbol());
 //                                currencyModalArrayList.add(new CryptoData(name, symbol));
                             }
-                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.activity_listview, R.id.name, cryptoList);
+                            CoinAdapter adapter = new CoinAdapter(getActivity(), (ArrayList<CryptoModel>) cryptoList);
                             listView.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();

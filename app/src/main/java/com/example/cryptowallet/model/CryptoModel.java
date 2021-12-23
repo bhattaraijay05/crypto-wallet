@@ -1,6 +1,8 @@
 package com.example.cryptowallet.model;
 
-public class CryptoModel {
+import java.io.Serializable;
+
+public class CryptoModel implements Serializable {
 
     private String name;
     private String symbol;
