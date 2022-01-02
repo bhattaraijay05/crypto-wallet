@@ -1,23 +1,18 @@
 package com.example.cryptowallet;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cryptowallet.model.CryptoModel;
 import com.ncorti.slidetoact.SlideToActView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class CoinData extends AppCompatActivity {
 
     TextView coinName,coinPrice;
-    SlideToActView sta = (SlideToActView) findViewById(R.id.example);
+//    SlideToActView sta = (SlideToActView) findViewById(R.id.example);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

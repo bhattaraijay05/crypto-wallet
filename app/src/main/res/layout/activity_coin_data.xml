@@ -28,8 +28,14 @@
 
     <com.ncorti.slidetoact.SlideToActView
         android:id="@+id/example"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        app:text="Example" />
+        app:outer_color="@color/frag1Color"
+        android:elevation="6dp"
+        app:inner_color="@color/white"
+        app:text_size="25sp"
+        app:bump_vibration="50"
+        app:text="Buy" />
 
 </LinearLayout>
