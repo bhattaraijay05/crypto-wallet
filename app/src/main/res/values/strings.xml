@@ -2,8 +2,8 @@
     <string name="app_name">Crypto wallet</string>
     <string name="title_activity_bottom_tab">BottomTab</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Transaction</string>
+    <string name="title_notifications">Profile</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_signup">SignupActivity</string>
     <string name="prompt_email">Email</string>

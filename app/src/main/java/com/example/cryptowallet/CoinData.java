@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 public class CoinData extends AppCompatActivity {
 
-    TextView receiver_msg;
+    TextView coinName,coinPrice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,17 +23,11 @@ public class CoinData extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        receiver_msg = (TextView)findViewById(R.id.received_value_id);
+        coinName = (TextView)findViewById(R.id.coinName);
+        coinPrice = (TextView)findViewById(R.id.coinPrice);
         Intent intent = getIntent();
         CryptoModel coins = (CryptoModel) intent.getSerializableExtra("coinData");
-        receiver_msg.setText(coins.getName());
-//        Log.d("a", str);
-//
-//        try {
-//            JSONObject json = new JSONObject(str);
-//            receiver_msg.setText(str);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+        coinName.setText(coins.getName());
+        coinPrice.setText(String.valueOf(coins.getPrice()));
     }
 }

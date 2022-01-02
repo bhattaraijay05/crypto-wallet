@@ -1,4 +1,4 @@
-package com.example.cryptowallet.ui.dashboard;
+package com.example.cryptowallet.ui.transaction;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,21 +7,18 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.cryptowallet.databinding.FragmentDashboardBinding;
+import com.example.cryptowallet.databinding.FragmentTransactionBinding;
 
 
-public class DashboardFragment extends Fragment {
+public class TransactionFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentTransactionBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentTransactionBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         return root;

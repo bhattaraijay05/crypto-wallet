@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -97,6 +98,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         if (task.isSuccessful()) {
                             FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
                              if (userr != null) {
+
+                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                         .setDisplayName(fullName).build();
+
+                                 userr.updateProfile(profileUpdates);
+
                                  String uid = userr.getUid();
                                  firebaseDatabase = FirebaseFirestore.getInstance();
                                  DocumentReference users = firebaseDatabase.collection("users").document(uid);

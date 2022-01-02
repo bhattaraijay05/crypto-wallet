@@ -4,11 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CoinData">
 
 
     <TextView
-        android:id="@+id/received_value_id"
+        android:id="@+id/coinName"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"/>
+
+    <TextView
+        android:id="@+id/coinPrice"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:textStyle="bold"
