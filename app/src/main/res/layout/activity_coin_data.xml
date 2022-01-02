@@ -26,6 +26,30 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="40dp"/>
 
+
+    <EditText
+        android:id="@+id/editCoins"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_margin="30dp"
+        android:textSize="25sp"
+        android:scrollbars="vertical"
+        android:inputType="number"
+        android:autofillHints="Enter Amount">
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/totalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="Total Price"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="40dp"/>
+
     <com.ncorti.slidetoact.SlideToActView
         android:id="@+id/example"
         android:layout_width="350dp"
