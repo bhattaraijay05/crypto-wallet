@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.cryptowallet.model.CryptoModel;
+import com.ncorti.slidetoact.SlideToActView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 public class CoinData extends AppCompatActivity {
 
     TextView coinName,coinPrice;
+    SlideToActView sta = (SlideToActView) findViewById(R.id.example);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
