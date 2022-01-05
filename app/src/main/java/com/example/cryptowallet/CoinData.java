@@ -37,7 +37,7 @@ public class CoinData extends AppCompatActivity {
         Intent intent = getIntent();
         CryptoModel coins = (CryptoModel) intent.getSerializableExtra("coinData");
         coinName.setText(coins.getName());
-        coinPrice.setText(String.valueOf(coins.getPrice()));
+        coinPrice.setText("1 " + coins.getSymbol() + " = $" + coins.getPrice() );
         buyCoins(String.valueOf(coins.getPrice()));
 
 

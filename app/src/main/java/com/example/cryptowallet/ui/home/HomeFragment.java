@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -21,8 +25,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cryptowallet.CoinAdapter;
 import com.example.cryptowallet.CoinData;
+import com.example.cryptowallet.R;
 import com.example.cryptowallet.databinding.FragmentHomeBinding;
 import com.example.cryptowallet.model.CryptoModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,7 +62,34 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getActivity().getApplicationContext(), CoinData.class);
                 intent.putExtra("coinData", item);
                 startActivity(intent);
+            }
+        });
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            int mLastFirstVisibleItem = 0;
 
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (view.getId() == listView.getId()) {
+                    final int currentFirstVisibleItem = listView.getFirstVisiblePosition();
+                    if (currentFirstVisibleItem > mLastFirstVisibleItem) {
+                        // hide the bottom tab with animation
+                        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+                        BottomNavigationView navigation = getActivity().findViewById(R.id.nav_view);
+                        navigation.animate().translationY(navigation.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
+                        // show the bottom tab with animation
+                        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+                        BottomNavigationView navigation = getActivity().findViewById(R.id.nav_view);
+                        navigation.animate().translationY(0).setInterpolator(new AccelerateInterpolator(2));
+
+
+                    }
+                    mLastFirstVisibleItem = currentFirstVisibleItem;
+                }
             }
         });
 

@@ -10,29 +10,36 @@
 
     <TextView
         android:id="@+id/coinName"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textStyle="bold"
         android:textSize="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"/>
+        android:layout_marginLeft="10dp"
+        android:text="Bitcoin"/>
 
     <TextView
         android:id="@+id/coinPrice"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textStyle="bold"
-        android:textSize="40dp"
+        android:textSize="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"/>
-
+        android:text="Enter the amount you want to buy"
+        android:layout_marginLeft="20dp"/>
 
     <EditText
         android:id="@+id/editCoins"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_margin="30dp"
+        android:layout_marginHorizontal="15dp"
         android:textSize="25sp"
         android:scrollbars="vertical"
         android:inputType="number"
@@ -60,6 +67,8 @@
         app:inner_color="@color/white"
         app:text_size="25sp"
         app:bump_vibration="50"
-        app:text="Buy" />
+        app:text="Buy"
+        android:layout_marginTop="50dp"
+        />
 
 </LinearLayout>

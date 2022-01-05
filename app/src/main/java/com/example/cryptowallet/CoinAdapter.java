@@ -41,14 +41,17 @@ public class CoinAdapter extends BaseAdapter {
         if (convertView ==  null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.activity_listview, parent, false);
         }
-        TextView name, email, price;
+        TextView name, symbol, price,my_letter;
         name = (TextView) convertView.findViewById(R.id.name);
-        email = (TextView) convertView.findViewById(R.id.symbol);
+        symbol = (TextView) convertView.findViewById(R.id.symbol);
         price = (TextView) convertView.findViewById(R.id.price);
+        my_letter = (TextView) convertView.findViewById(R.id.my_letter);
 
-        name.setText(arrayList.get(position).getName());
-        email.setText(arrayList.get(position).getSymbol());
-        price.setText(String.format("%.02f", arrayList.get(position).getPrice()));
+
+        symbol.setText(arrayList.get(position).getName());
+        name.setText(arrayList.get(position).getSymbol());
+        price.setText("$" + String.format("%.05f", arrayList.get(position).getPrice()));
+        my_letter.setText(String.valueOf(name.getText().toString().charAt(0)));
 
         return convertView;
     }
