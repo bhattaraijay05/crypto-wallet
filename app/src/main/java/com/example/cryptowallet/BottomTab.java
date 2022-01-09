@@ -14,13 +14,11 @@ import com.example.cryptowallet.databinding.ActivityBottomTabBinding;
 
 public class BottomTab extends AppCompatActivity {
 
-    private ActivityBottomTabBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityBottomTabBinding.inflate(getLayoutInflater());
+        com.example.cryptowallet.databinding.ActivityBottomTabBinding binding = ActivityBottomTabBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
