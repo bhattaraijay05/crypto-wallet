@@ -42,7 +42,7 @@ import java.util.Map;
 //API Key: BE8FD9B2-EA0A-40D4-AA71-BDA225A11989
 
 public class HomeFragment extends Fragment {
-    ListView listView;
+    public ListView listView;
     List<CryptoModel> cryptoList;
     private FragmentHomeBinding binding;
     private String ACCESS_TOKEN = "b3ae9792-4fcc-4a8f-9376-42ad354f9bd0";
@@ -111,8 +111,6 @@ public class HomeFragment extends Fragment {
                                 double price = USD.getDouble("price");
                                 CryptoModel coin = new CryptoModel(name, symbol, price);
                                 cryptoList.add(coin);
-//                                cryptoList.add(coin.getSymbol());
-//                                currencyModalArrayList.add(new CryptoData(name, symbol));
                             }
                             CoinAdapter adapter = new CoinAdapter(getActivity(), (ArrayList<CryptoModel>) cryptoList);
                             listView.setAdapter(adapter);
@@ -128,7 +126,6 @@ public class HomeFragment extends Fragment {
                     }
                 }) {
 
-            //This is for Headers If You Needed
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
@@ -141,9 +138,4 @@ public class HomeFragment extends Fragment {
         requestQueue.add(objectRequest);
     }
 
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        binding = null;
-//    }
 }

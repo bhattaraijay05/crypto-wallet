@@ -60,4 +60,19 @@
         android:text="Logout"
         android:id="@+id/logoutButton"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Investments"
+        android:textSize="25dp"
+        />
+
+    <ListView
+        android:id="@+id/my_coins"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay" />
+
+
 </LinearLayout>

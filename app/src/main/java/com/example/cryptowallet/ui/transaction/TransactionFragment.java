@@ -50,15 +50,11 @@ public class TransactionFragment extends Fragment {
         binding = FragmentTransactionBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         listView = binding.transactionList;
-        loadTransactions();
-
+        getListItems();
 
         return root;
     }
 
-    private void loadTransactions() {
-        getListItems();
-    }
 
     private void getListItems() {
 

@@ -42,14 +42,18 @@ public class MyCoinAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        if (convertView ==  null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.activity_listview, parent, false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.my_coins, parent, false);
         }
-        TextView name, symbol, price;
+        TextView coinName, count, returns, currentPrice, investedPrice;
         CircularTextView my_letter;
-        name = (TextView) convertView.findViewById(R.id.name);
-        symbol = (TextView) convertView.findViewById(R.id.symbol);
-        price = (TextView) convertView.findViewById(R.id.price);
+        coinName = convertView.findViewById(R.id.coinName);
+        count = convertView.findViewById(R.id.count);
+        returns = convertView.findViewById(R.id.returns);
+        currentPrice = convertView.findViewById(R.id.currentPrice);
+        investedPrice = convertView.findViewById(R.id.investedPrice);
+
+
         my_letter = (CircularTextView) convertView.findViewById(R.id.circularTextView);
 
         my_letter.setStrokeWidth(1);
@@ -62,11 +66,14 @@ public class MyCoinAdapter extends BaseAdapter {
             my_letter.setSolidColor("#138086");
         }
 
-        symbol.setText(arrayList.get(position).getName());
-        name.setText(arrayList.get(position).getSymbol());
-        price.setText(arrayList.get(position).getPrice());
+        coinName.setText(arrayList.get(position).getName());
+        count.setText(arrayList.get(position).getCount() + "");
+//        returns.setText(arrayList.get(position).getReturns());
+//        currentPrice.setText(arrayList.get(position).getCurrentPrice());
+        investedPrice.setText("Invested\n"+arrayList.get(position).getTotal());
 
-        my_letter.setText(String.valueOf(name.getText().toString().charAt(0)));
+
+        my_letter.setText(String.valueOf(coinName.getText().toString().charAt(0)));
 
         return convertView;
     }

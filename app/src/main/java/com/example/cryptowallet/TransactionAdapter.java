@@ -70,7 +70,7 @@ public class TransactionAdapter extends BaseAdapter {
         symbol.setText(arrayList.get(position).getName());
         name.setText(arrayList.get(position).getSymbol());
         price.setText("Price  $" + arrayList.get(position).getPrice());
-        count.setText("Qty  $" + arrayList.get(position).getCount());
+        count.setText("Qty  " + arrayList.get(position).getCount());
         type.setText(arrayList.get(position).getType().toUpperCase());
         total.setText("Total  $" + arrayList.get(position).getTotal());
         my_letter.setText(String.valueOf(name.getText().toString().charAt(0)));
