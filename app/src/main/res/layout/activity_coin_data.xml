@@ -9,41 +9,44 @@
 
 
     <TextView
-        android:id="@+id/coinName"
+        android:id="@+id/info"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textStyle="bold"
-        android:textSize="40dp"
-        android:layout_marginLeft="10dp"
-        android:text="Bitcoin"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:gravity="center"
+        android:text="Estimated Buying Price"
+        android:textColor="@color/gray"
+        android:textSize="13dp" />
 
     <TextView
         android:id="@+id/coinPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"/>
-
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/gray"
+        android:textSize="15dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="Enter the amount you want to buy"
-        android:layout_marginLeft="20dp"/>
+        android:text="How much do you want to buy?"
+        android:textSize="15dp"
+        android:gravity="center"/>
 
     <EditText
         android:id="@+id/editCoins"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
-        android:textSize="25sp"
-        android:scrollbars="vertical"
+        android:autofillHints="Enter Amount"
         android:inputType="number"
-        android:autofillHints="Enter Amount">
+        android:hint="In Dollar"
+        android:scrollbars="vertical"
+        android:textSize="25sp">
+
         <requestFocus />
     </EditText>
 
@@ -51,24 +54,23 @@
         android:id="@+id/totalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:text="Total Price"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="40dp"/>
+        android:text="Total Price"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <com.ncorti.slidetoact.SlideToActView
         android:id="@+id/example"
         android:layout_width="350dp"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        app:outer_color="@color/frag1Color"
-        android:elevation="6dp"
-        app:inner_color="@color/white"
-        app:text_size="25sp"
-        app:bump_vibration="50"
-        app:text="Buy"
+        android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        />
+        android:elevation="6dp"
+        app:bump_vibration="50"
+        app:inner_color="@color/white"
+        app:outer_color="@color/frag1Color"
+        app:text="Buy"
+        app:text_size="25sp" />
 
 </LinearLayout>

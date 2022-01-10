@@ -27,6 +27,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
@@ -63,19 +64,23 @@ public class TransactionFragment extends Fragment {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        db.collection("users").document(user.getUid()).collection("coins").get()
+
+        db.collection("users").document(user.getUid()).collection("coins").orderBy("time", Query.Direction.DESCENDING).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         ArrayList<TransactionModel> transactions = new ArrayList<>();
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            document.toObject(TransactionModel.class);
                             TransactionModel p = document.toObject(TransactionModel.class);
                             transactions.add(p);
                         }
-                        TransactionAdapter adapter = new TransactionAdapter(getContext(), transactions);
-                        listView.setAdapter(adapter);
-//                        Log.d("TAG", "onSuccess: " + transactions);
-
+                        if (transactions.size() > 0) {
+                            TransactionAdapter adapter = new TransactionAdapter(getContext(), transactions);
+                            listView.setAdapter(adapter);
+                        } else {
+                            Toast.makeText(getContext(), "No transactions found", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }

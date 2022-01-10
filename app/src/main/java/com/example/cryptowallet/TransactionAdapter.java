@@ -1,16 +1,19 @@
 package com.example.cryptowallet;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.cryptowallet.custom.CircularTextView;
 import com.example.cryptowallet.model.CryptoModel;
 import com.example.cryptowallet.model.TransactionModel;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TransactionAdapter extends BaseAdapter {
 
@@ -40,18 +43,36 @@ public class TransactionAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView ==  null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.activity_listview, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.transaction_list_view, parent, false);
         }
-        TextView name, symbol, price,my_letter;
+        TextView name, symbol, price, count, type, total;
+        CircularTextView my_letter;
         name = (TextView) convertView.findViewById(R.id.name);
         symbol = (TextView) convertView.findViewById(R.id.symbol);
         price = (TextView) convertView.findViewById(R.id.price);
-        my_letter = (TextView) convertView.findViewById(R.id.my_letter);
+        count = (TextView) convertView.findViewById(R.id.count);
+        type = (TextView) convertView.findViewById(R.id.type);
+        my_letter = (CircularTextView) convertView.findViewById(R.id.circularTextView);
+        total = (TextView) convertView.findViewById(R.id.total);
 
+        my_letter.setStrokeWidth(1);
+        my_letter.setStrokeColor("#ffffff");
+        my_letter.setSolidColor("#f5d488");
+        my_letter.setTextColor(Color.parseColor("#ffffff"));
+        if (Objects.equals(arrayList.get(position).getType(), "sell")) {
+            my_letter.setSolidColor("#d72631");
+            type.setTextColor(Color.parseColor("#d72631"));
+        } else {
+            my_letter.setSolidColor("#138086");
+            type.setTextColor(Color.parseColor("#138086"));
+        }
 
         symbol.setText(arrayList.get(position).getName());
         name.setText(arrayList.get(position).getSymbol());
-        price.setText(arrayList.get(position).getPrice());
+        price.setText("Price  $" + arrayList.get(position).getPrice());
+        count.setText("Qty  $" + arrayList.get(position).getCount());
+        type.setText(arrayList.get(position).getType().toUpperCase());
+        total.setText("Total  $" + arrayList.get(position).getTotal());
         my_letter.setText(String.valueOf(name.getText().toString().charAt(0)));
 
         return convertView;

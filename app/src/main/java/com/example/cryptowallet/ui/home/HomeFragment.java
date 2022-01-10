@@ -85,8 +85,6 @@ public class HomeFragment extends Fragment {
                         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
                         BottomNavigationView navigation = getActivity().findViewById(R.id.nav_view);
                         navigation.animate().translationY(0).setInterpolator(new AccelerateInterpolator(2));
-
-
                     }
                     mLastFirstVisibleItem = currentFirstVisibleItem;
                 }
