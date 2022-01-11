@@ -8,21 +8,21 @@ import java.io.Serializable;
 
 public class TransactionModel implements Serializable {
 
-    private String name, symbol, price, id, type, count, total;
-    Timestamp time;
+    private String name, symbol, price, id, type, count, total, time;
 
     public TransactionModel() {
+
     }
 
-    public TransactionModel(String name, String symbol, String price, String id, String type, Timestamp time, String count, String total) {
+    public TransactionModel(String name, String symbol, String price, String id, String type, String count, String total, String time) {
         this.name = name;
         this.symbol = symbol;
         this.price = price;
         this.id = id;
         this.type = type;
-        this.time = time;
         this.count = count;
         this.total = total;
+        this.time = time;
     }
 
     public String getName() {
@@ -81,18 +81,11 @@ public class TransactionModel implements Serializable {
         this.total = total;
     }
 
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(String time) {
         this.time = time;
     }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return this.name + " " + this.symbol + " " + this.price + " " + this.id;
-    }
-
 }

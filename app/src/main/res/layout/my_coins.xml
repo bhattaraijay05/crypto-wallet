@@ -16,6 +16,7 @@
             android:layout_marginRight="10dp"
             android:gravity="center"
             android:padding="3dp"
+            android:layout_marginTop="10dp"
             android:text="11"
             android:textSize="35dp" />
 
@@ -35,16 +36,21 @@
             <TextView
                 android:id="@+id/coinName"
                 android:layout_width="0dp"
+                android:gravity="left"
+                android:layout_marginLeft="15dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textStyle="bold"
                 android:text="asdfadfa" />
 
             <TextView
                 android:id="@+id/count"
                 android:layout_width="0dp"
+                android:gravity="right"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="asdfadfasdfasdfasdfsadf" />
+                android:text="asdfadfas" />
 
         </LinearLayout>
 
@@ -58,6 +64,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="asdfad" />
 
             <TextView
@@ -65,11 +72,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="asdfad" />
 
             <TextView
                 android:id="@+id/investedPrice"
                 android:layout_width="0dp"
+                android:gravity="center"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="asdfadf" />

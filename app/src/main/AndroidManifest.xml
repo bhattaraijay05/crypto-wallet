@@ -16,6 +16,10 @@
             android:parentActivityName=".BottomTab"
             android:exported="true" />
         <activity
+            android:name=".SellFragment"
+            android:parentActivityName=".BottomTab"
+            android:exported="true" />
+        <activity
             android:name=".BottomTab"
             android:exported="false"
             android:label="@string/title_activity_bottom_tab" />

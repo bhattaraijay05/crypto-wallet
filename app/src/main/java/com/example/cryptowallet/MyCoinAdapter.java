@@ -60,17 +60,13 @@ public class MyCoinAdapter extends BaseAdapter {
         my_letter.setStrokeColor("#ffffff");
         my_letter.setSolidColor("#f5d488");
         my_letter.setTextColor(Color.parseColor("#ffffff"));
-        if (Objects.equals(arrayList.get(position).getName(), "Bitcoin")) {
-            my_letter.setSolidColor("#d72631");
-        } else {
-            my_letter.setSolidColor("#138086");
-        }
+        my_letter.setSolidColor("#5097a4");
 
         coinName.setText(arrayList.get(position).getName());
         count.setText(arrayList.get(position).getCount() + "");
 //        returns.setText(arrayList.get(position).getReturns());
 //        currentPrice.setText(arrayList.get(position).getCurrentPrice());
-        investedPrice.setText("Invested\n"+arrayList.get(position).getTotal());
+        investedPrice.setText("Invested\n $"+arrayList.get(position).getTotal());
 
 
         my_letter.setText(String.valueOf(coinName.getText().toString().charAt(0)));

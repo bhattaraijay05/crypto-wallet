@@ -7,8 +7,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private TextView textViewSignin;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    String amount;
 
     private FirebaseFirestore firebaseDatabase;
 
@@ -45,12 +48,18 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        Spinner spinner = (Spinner) findViewById(R.id.amount_spinner);
         Window window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(this.getResources().getColor(R.color.frag1Color));
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.amount, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        amount = spinner.getSelectedItem().toString();
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -111,6 +120,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                  use.put("Name", fullName);
                                  use.put("Email", email);
                                  use.put("uid", uid);
+                                 use.put("Amount", amount);
                                  users.set(use);
                              }
                             startActivity(new Intent(getApplicationContext(), BottomTab.class));

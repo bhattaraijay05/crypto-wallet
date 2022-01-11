@@ -1,6 +1,7 @@
 package com.example.cryptowallet;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -11,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.cryptowallet.databinding.ActivityBottomTabBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class BottomTab extends AppCompatActivity {
 
