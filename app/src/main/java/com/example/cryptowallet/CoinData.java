@@ -59,7 +59,7 @@ public class CoinData extends AppCompatActivity {
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
                         String bal = task.getResult().getString("Amount");
-                        balance.setText("Balance" + "  " + bal);
+                        balance.setText(bal);
                     }
                 });
 
@@ -127,7 +127,7 @@ public class CoinData extends AppCompatActivity {
     private void addToDatabase(String coinName, String buyPrice, String coinSymbol) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String bal = balance.getText().toString().replaceAll("[^0-9]", "");
+        String bal = balance.getText().toString();
         float amt = Float.parseFloat(bal) - Float.parseFloat(editCoins.getText().toString());
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

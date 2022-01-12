@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,7 +60,17 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        amount = spinner.getSelectedItem().toString();
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View view, int arg2, long arg3) {
+                amount = spinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                amount = "1000";
+            }
+        });
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -106,23 +117,23 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
-                             if (userr != null) {
+                            if (userr != null) {
 
-                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                         .setDisplayName(fullName).build();
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(fullName).build();
 
-                                 userr.updateProfile(profileUpdates);
+                                userr.updateProfile(profileUpdates);
 
-                                 String uid = userr.getUid();
-                                 firebaseDatabase = FirebaseFirestore.getInstance();
-                                 DocumentReference users = firebaseDatabase.collection("users").document(uid);
-                                 Map<String, Object> use = new HashMap<>();
-                                 use.put("Name", fullName);
-                                 use.put("Email", email);
-                                 use.put("uid", uid);
-                                 use.put("Amount", amount);
-                                 users.set(use);
-                             }
+                                String uid = userr.getUid();
+                                firebaseDatabase = FirebaseFirestore.getInstance();
+                                DocumentReference users = firebaseDatabase.collection("users").document(uid);
+                                Map<String, Object> use = new HashMap<>();
+                                use.put("Name", fullName);
+                                use.put("Email", email);
+                                use.put("uid", uid);
+                                use.put("Amount", amount);
+                                users.set(use);
+                            }
                             startActivity(new Intent(getApplicationContext(), BottomTab.class));
                         } else {
                             Toast.makeText(getApplicationContext(), "Registration Error", Toast.LENGTH_LONG).show();
