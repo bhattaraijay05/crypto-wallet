@@ -1,11 +1,12 @@
 package com.example.cryptowallet.ui.home;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -43,8 +44,8 @@ import java.util.Map;
 
 public class HomeFragment extends Fragment {
     public ListView listView;
-    List<CryptoModel> cryptoList;
     private FragmentHomeBinding binding;
+    public List<CryptoModel> cryptoList;
     private String ACCESS_TOKEN = "b3ae9792-4fcc-4a8f-9376-42ad354f9bd0";
     private String url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=100";
 
@@ -56,6 +57,7 @@ public class HomeFragment extends Fragment {
         listView = binding.currencyList;
         cryptoList = new ArrayList<CryptoModel>();
         loadCoinList();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -91,7 +93,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
         return root;
     }
 
@@ -115,6 +116,10 @@ public class HomeFragment extends Fragment {
                             }
                             CoinAdapter adapter = new CoinAdapter(getActivity(), (ArrayList<CryptoModel>) cryptoList);
                             listView.setAdapter(adapter);
+                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("cryptoList", cryptoList.toString());
+                            editor.apply();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

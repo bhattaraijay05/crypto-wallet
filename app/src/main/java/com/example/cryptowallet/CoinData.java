@@ -135,6 +135,7 @@ public class CoinData extends AppCompatActivity {
 
         if (amt > 10 && Float.parseFloat(editCoins.getText().toString()) < Float.parseFloat(bal)) {
             DocumentReference docRef = db.collection("users").document(user.getUid()).collection("coins").document(uniqueID);
+            DocumentReference transRef = db.collection("users").document(user.getUid()).collection("transactions").document(uniqueID);
             Map<String, Object> use = new HashMap<>();
             use.put("name", coinName);
             use.put("price", buyPrice);
@@ -145,9 +146,10 @@ public class CoinData extends AppCompatActivity {
             use.put("total", editCoins.getText().toString());
             use.put("time", String.valueOf(dtf.format(now)));
             docRef.set(use);
+            transRef.set(use);
+
             db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .update("Amount", String.valueOf(amt));
-
         } else {
             Toast.makeText(CoinData.this, "Insufficient Funds", Toast.LENGTH_SHORT).show();
         }

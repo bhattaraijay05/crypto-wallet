@@ -1,8 +1,11 @@
 package com.example.cryptowallet.ui.profile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +26,7 @@ import com.example.cryptowallet.R;
 import com.example.cryptowallet.SellFragment;
 import com.example.cryptowallet.custom.CircularTextView;
 import com.example.cryptowallet.databinding.FragmentProfileBinding;
+import com.example.cryptowallet.model.CryptoModel;
 import com.example.cryptowallet.model.TransactionModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,7 +37,14 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
@@ -42,8 +53,11 @@ public class ProfileFragment extends Fragment {
     TextView userBalance;
     ArrayList<TransactionModel> transactions;
 
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    List<CryptoModel> cryptoList;
+    private String ACCESS_TOKEN = "b3ae9792-4fcc-4a8f-9376-42ad354f9bd0";
+    private String url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=100";
 
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,6 +79,9 @@ public class ProfileFragment extends Fragment {
         userName.setSolidColor("#f5d488");
         userName.setTextColor(Color.parseColor("#ffffff"));
         getListItems();
+
+
+
         logoutButton.setOnClickListener(view -> {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
@@ -121,7 +138,6 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-//                            only add the coins that are of type buy
                             if (Objects.equals(document.getString("type"), "buy")) {
                                 document.toObject(TransactionModel.class);
                                 TransactionModel p = document.toObject(TransactionModel.class);
@@ -132,7 +148,7 @@ public class ProfileFragment extends Fragment {
                             MyCoinAdapter adapter = new MyCoinAdapter(getContext(), transactions);
                             listView.setAdapter(adapter);
                         } else {
-                            Toast.makeText(getContext(), "No transactions found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "No coins found", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -143,4 +159,5 @@ public class ProfileFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

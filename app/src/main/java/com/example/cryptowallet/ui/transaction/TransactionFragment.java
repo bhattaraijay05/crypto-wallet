@@ -61,7 +61,7 @@ public class TransactionFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        db.collection("users").document(user.getUid()).collection("coins").orderBy("time", Query.Direction.DESCENDING).get()
+        db.collection("users").document(user.getUid()).collection("transactions").orderBy("time", Query.Direction.DESCENDING).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
