@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="25dp"
-            android:text="Amount" />
+            android:text="Invested" />
 
         <TextView
             android:id="@+id/amount"
@@ -103,6 +103,59 @@
 
         <TextView
             android:id="@+id/time"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="asdfadf" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="50sp"
+        android:orientation="horizontal"
+        android:layout_marginVertical="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="25dp"
+            android:text="Current" />
+
+        <TextView
+            android:id="@+id/current"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="asdfadf" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="50sp"
+        android:orientation="horizontal"
+        android:layout_marginVertical="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="25dp"
+            android:text="Return" />
+
+        <TextView
+            android:id="@+id/returns"
             android:layout_width="0dp"
             android:gravity="center"
             android:textStyle="bold"

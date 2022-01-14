@@ -1,19 +1,15 @@
 package com.example.cryptowallet;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cryptowallet.custom.CircularTextView;
-import com.example.cryptowallet.model.CryptoModel;
 import com.example.cryptowallet.model.TransactionModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,11 +19,7 @@ import com.ncorti.slidetoact.SlideToActView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -35,7 +27,7 @@ import java.util.UUID;
 public class SellFragment extends AppCompatActivity {
 
     CircularTextView my_letter;
-    TextView coinName, coinCount, amount, time;
+    TextView coinName, coinCount, amount, time, returns, current;
     String userBalance;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -50,28 +42,13 @@ public class SellFragment extends AppCompatActivity {
         Intent intent = getIntent();
         TransactionModel coins = (TransactionModel) intent.getSerializableExtra("coin");
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String crypto = prefs.getString("cryptoList", null);
-//
-////        convert crypto to a list
-//        String[] cryptoList = crypto.split(",");
-//
-////        convert string array to list
-//
-//        List<CryptoModel> stringList = new ArrayList<CryptoModel>((Collection<? extends CryptoModel>) Arrays.asList(cryptoList));
-//
-//        for (int i = 0; i < stringList.size(); i++) {
-//            Log.d("crypto", stringList.get(i).getName());
-//        }
-
         my_letter = (CircularTextView) findViewById(R.id.circularTextView);
         coinName = (TextView) findViewById(R.id.coinName);
         coinCount = (TextView) findViewById(R.id.coinCount);
         amount = (TextView) findViewById(R.id.amount);
         time = (TextView) findViewById(R.id.time);
-
-
-
+        returns = (TextView) findViewById(R.id.returns);
+        current = (TextView) findViewById(R.id.current);
 
 
         my_letter.setText(coins.getName().substring(0, 1));
@@ -86,6 +63,20 @@ public class SellFragment extends AppCompatActivity {
         amount.setText(coins.getTotal());
         time.setText(coins.getTime());
 
+        float randNo = (int) (Math.random() * 200 - 100);
+        float curval = Float.parseFloat(coins.getTotal()) + randNo;
+        returns.setText("Return\n $ " + randNo);
+        current.setText("Current\n $" + curval);
+
+        if (randNo > 0) {
+            my_letter.setSolidColor("#5097a4");
+            returns.setTextColor(Color.parseColor("#5097a4"));
+        } else {
+            my_letter.setSolidColor("#ED2839");
+            returns.setTextColor(Color.parseColor("#ED2839"));
+        }
+
+
         db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
@@ -99,7 +90,7 @@ public class SellFragment extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSlideComplete(SlideToActView slideToActView) {
-                addToDatabase(coins.getName(), coins.getPrice(), coins.getSymbol(), coins.getTotal(), coins.getId());
+                addToDatabase(coins.getName(), coins.getPrice(), coins.getSymbol(), String.valueOf(curval), coins.getId());
             }
         });
     }

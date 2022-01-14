@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_weight="1"
-            app:cardBackgroundColor="#fece2f"
+            app:cardBackgroundColor="@color/frag1Color"
             app:cardElevation="10dp">
 
             <RelativeLayout
@@ -35,6 +35,7 @@
                     android:includeFontPadding="false"
                     android:padding="3dp"
                     android:text="A"
+                    android:textColor="@color/white"
                     android:textSize="60dp" />
 
 
@@ -46,6 +47,7 @@
                     android:layout_centerHorizontal="true"
                     android:includeFontPadding="false"
                     android:text="Balance"
+                    android:textColor="@color/white"
                     android:textSize="20sp" />
 
             </RelativeLayout>

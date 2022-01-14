@@ -1,9 +1,7 @@
 package com.example.cryptowallet;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.cryptowallet.custom.CircularTextView;
-import com.example.cryptowallet.model.CryptoModel;
 import com.example.cryptowallet.model.TransactionModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MyCoinAdapter extends BaseAdapter {
 
@@ -42,6 +38,7 @@ public class MyCoinAdapter extends BaseAdapter {
         return i;
     }
 
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -62,14 +59,21 @@ public class MyCoinAdapter extends BaseAdapter {
         my_letter.setStrokeColor("#ffffff");
         my_letter.setSolidColor("#f5d488");
         my_letter.setTextColor(Color.parseColor("#ffffff"));
-        my_letter.setSolidColor("#5097a4");
 
         coinName.setText(arrayList.get(position).getName());
         count.setText(arrayList.get(position).getCount() + "");
-//        returns.setText(arrayList.get(position).getReturns());
-//        currentPrice.setText(arrayList.get(position).getCurrentPrice());
+        float randNo = (int) (Math.random() * 200 - 100);
+        float curval =  Float.parseFloat(arrayList.get(position).getTotal()) + randNo;
+        returns.setText("Return\n $ "+ randNo);
+        currentPrice.setText("Current\n $"+curval);
         investedPrice.setText("Invested\n $"+arrayList.get(position).getTotal());
-
+        if (randNo > 0) {
+            my_letter.setSolidColor("#5097a4");
+            returns.setTextColor(Color.parseColor("#5097a4"));
+        } else {
+            my_letter.setSolidColor("#ED2839");
+            returns.setTextColor(Color.parseColor("#ED2839"));
+        }
 
         my_letter.setText(String.valueOf(coinName.getText().toString().charAt(0)));
 
