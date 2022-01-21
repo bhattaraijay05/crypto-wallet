@@ -3,7 +3,9 @@ package com.example.cryptowallet;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -60,6 +62,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+
+
+
+
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
             return;
@@ -69,22 +77,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
             return;
         }
-        progressDialog.setMessage("Logging in Please Wait...");
-        progressDialog.show();
 
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
-                        if (task.isSuccessful()) {
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), BottomTab.class));
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Login Error, check credentials", Toast.LENGTH_LONG).show();
+        if (email.matches(emailPattern) && email.length() > 0) {
+            progressDialog.setMessage("Logging in Please Wait...");
+            progressDialog.show();
+
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
+                            if (task.isSuccessful()) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), BottomTab.class));
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Login Error, check credentials", Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
+
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     @Override

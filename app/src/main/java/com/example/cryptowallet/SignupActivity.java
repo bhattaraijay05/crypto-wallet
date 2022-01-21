@@ -94,6 +94,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         String fullName = editTextFullName.getText().toString().trim();
+
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
             return;
@@ -108,39 +111,44 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Name cannot be empty", Toast.LENGTH_LONG).show();
             return;
         }
-        progressDialog.setMessage("Registering Please Wait...");
-        progressDialog.show();
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
-                            if (userr != null) {
+        if (email.matches(emailPattern) && email.length() > 0) {
+            progressDialog.setMessage("Registering Please Wait...");
+            progressDialog.show();
 
-                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(fullName).build();
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+                                if (userr != null) {
 
-                                userr.updateProfile(profileUpdates);
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(fullName).build();
 
-                                String uid = userr.getUid();
-                                firebaseDatabase = FirebaseFirestore.getInstance();
-                                DocumentReference users = firebaseDatabase.collection("users").document(uid);
-                                Map<String, Object> use = new HashMap<>();
-                                use.put("Name", fullName);
-                                use.put("Email", email);
-                                use.put("uid", uid);
-                                use.put("Amount", amount);
-                                users.set(use);
+                                    userr.updateProfile(profileUpdates);
+
+                                    String uid = userr.getUid();
+                                    firebaseDatabase = FirebaseFirestore.getInstance();
+                                    DocumentReference users = firebaseDatabase.collection("users").document(uid);
+                                    Map<String, Object> use = new HashMap<>();
+                                    use.put("Name", fullName);
+                                    use.put("Email", email);
+                                    use.put("uid", uid);
+                                    use.put("Amount", amount);
+                                    users.set(use);
+                                }
+                                startActivity(new Intent(getApplicationContext(), BottomTab.class));
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Registration Error", Toast.LENGTH_LONG).show();
                             }
-                            startActivity(new Intent(getApplicationContext(), BottomTab.class));
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Registration Error", Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
                         }
-                        progressDialog.dismiss();
-                    }
-                });
+                    });
+        }else {
+            Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
