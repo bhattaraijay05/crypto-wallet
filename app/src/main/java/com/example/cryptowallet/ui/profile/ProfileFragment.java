@@ -68,6 +68,7 @@ public class ProfileFragment extends Fragment {
         View root = binding.getRoot();
 
         final CircularTextView userName = binding.textNotifications;
+        final TextView greet = binding.greeting;
         listView = binding.myCoins;
         userBalance = binding.balance;
         final Button logoutButton = binding.logoutButton;
@@ -76,8 +77,9 @@ public class ProfileFragment extends Fragment {
         userName.setText(String.valueOf(user.getDisplayName().toString().charAt(0)));
         userName.setStrokeWidth(1);
         userName.setStrokeColor("#ffffff");
-        userName.setSolidColor("#f5d488");
+        userName.setSolidColor("#7F3DFF");
         userName.setTextColor(Color.parseColor("#ffffff"));
+        greet.setText("Hello, " + user.getDisplayName().toString());
         getListItems();
 
 

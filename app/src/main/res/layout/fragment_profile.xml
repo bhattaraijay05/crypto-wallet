@@ -15,7 +15,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="190dp"
             android:layout_weight="1"
             app:cardBackgroundColor="@color/frag1Color"
             app:cardElevation="10dp">
@@ -40,10 +40,21 @@
 
 
                 <TextView
-                    android:id="@+id/balance"
+                    android:id="@+id/greeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_notifications"
+                    android:layout_centerHorizontal="true"
+                    android:includeFontPadding="false"
+                    android:text="Greeting"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/greeting"
                     android:layout_centerHorizontal="true"
                     android:includeFontPadding="false"
                     android:text="Balance"

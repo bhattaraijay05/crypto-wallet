@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
     public ListView listView;
     private FragmentHomeBinding binding;
     public List<CryptoModel> cryptoList;
-    private String ACCESS_TOKEN = "b3ae9792-4fcc-4a8f-9376-42ad354f9bd0";
+    private String ACCESS_TOKEN = "2b6fdcad-3370-4a15-a309-f585c025b870";
     private String url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=100";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
